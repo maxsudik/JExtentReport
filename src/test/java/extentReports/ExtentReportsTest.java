@@ -53,7 +53,10 @@ public class ExtentReportsTest {
         FileUtils.copyFile(source, destination);
         byte[] imageBytes = IOUtils.toByteArray(new FileInputStream(path));
         return Base64.getEncoder().encodeToString(imageBytes);
+    }
 
+    public String getBase64() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
     }
 
     @BeforeSuite
@@ -147,5 +150,14 @@ public class ExtentReportsTest {
         test2.pass(MarkupHelper.createLabel("Login test passed", ExtentColor.GREEN));
         test2.pass("Base64 screenshot attached here", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshotAsBase64()).build());
 
+        driver.navigate().to("https://www.bing.com");
+        ExtentTest test3 = extent.createTest("Base 64 screenshot test").assignAuthor("QA Author").assignCategory("Parallel").assignDevice("Edge");
+        test3.pass("Login Test started successfully");
+        test3.pass("URL is loaded");
+        test3.pass("Value entered");
+        test3.pass("Login Test completed successfully");
+        test3.info("This is some info for testing logs");
+        test3.pass(MarkupHelper.createLabel("Login test passed", ExtentColor.GREEN));
+        test3.pass("Base64 1 liner screenshot attached here", MediaEntityBuilder.createScreenCaptureFromBase64String(getBase64()).build());
     }
 }
