@@ -2,8 +2,8 @@ package extentReports;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.testng.annotations.Test;
 
 import java.awt.*;
@@ -16,9 +16,11 @@ public class ExtentReportsTest {
     public void extentTest() throws IOException {
         ExtentReports extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/reports/index.html");
+        ExtentSparkReporter failedSpark = new ExtentSparkReporter("src/test/java/reports/failed-tests-index.html").filter().statusFilter().as(new Status[]{Status.FAIL}).apply();
 
         final File CONF = new File("src/test/java/config/spark-config.json");
         spark.loadJSONConfig(CONF);
+        failedSpark.loadJSONConfig(CONF);
 
 
 //        final File CONF = new File("src/test/java/config/spark-config.xml");
@@ -27,7 +29,8 @@ public class ExtentReportsTest {
 //        spark.config().setTheme(Theme.DARK);
 //        spark.config().setDocumentTitle("My Report");
 //        spark.config().setReportName("Max Sudik");
-        extent.attachReporter(spark);
+        extent.attachReporter(spark, failedSpark);
+
 
         ExtentTest test1 = extent.createTest("Login Test").assignAuthor("Max Sudik").assignCategory("Smoke").assignCategory("Regression").assignDevice("chrome 96");
         test1.pass("Login Test started successfully");
@@ -42,7 +45,6 @@ public class ExtentReportsTest {
         test2.pass("URL is loaded");
         test2.pass("Value entered");
         test2.pass("Login Test completed successfully");
-        test2.fail("Test Failed here");
         test2.info("This is some info for testing logs");
 
         extent.flush();
