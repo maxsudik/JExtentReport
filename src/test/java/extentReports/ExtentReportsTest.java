@@ -9,6 +9,9 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
@@ -26,6 +29,15 @@ public class ExtentReportsTest {
 
     WebDriver driver;
     ExtentReports extent;
+
+    public String getScreenshotPath() throws IOException {
+        TakesScreenshot camera = (TakesScreenshot) driver;
+        File source = camera.getScreenshotAs(OutputType.FILE);
+        String path = System.getProperty("user.dir") + "test/java/reports/screenshots.image.png";
+        File destination = new File(path);
+        FileUtils.copyFile(source, destination);
+        return path;
+    }
 
     @BeforeSuite
     public void setUp() throws IOException {
@@ -93,6 +105,7 @@ public class ExtentReportsTest {
         map.put("key2", "Appium");
         map.put("key3", "RestAssured");
 
+        driver.get("https://www.google.com/?client=safari");
         ExtentTest test1 = extent.createTest("Login Test").assignAuthor("Max Sudik").assignCategory("Smoke").assignCategory("Regression").assignDevice("chrome 96");
         test1.pass("Login Test started successfully");
         test1.pass("URL is loaded");
@@ -106,6 +119,7 @@ public class ExtentReportsTest {
         test1.info(MarkupHelper.createCodeBlock(xmlExample, CodeLanguage.XML));
         test1.fail(MarkupHelper.createLabel("Login test failed", ExtentColor.RED));
 
+        driver.navigate().to("https://duckduckgo.com");
         ExtentTest test2 = extent.createTest("Home Page test").assignAuthor("Another Author").assignCategory("Integration").assignDevice("safari latest");
         test2.pass("Login Test started successfully");
         test2.pass("URL is loaded");
