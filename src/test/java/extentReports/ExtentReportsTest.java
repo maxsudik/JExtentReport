@@ -11,6 +11,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,10 +20,12 @@ import org.testng.annotations.*;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +42,18 @@ public class ExtentReportsTest {
         File destination = new File(path);
         FileUtils.copyFile(source, destination);
         return path;
+    }
+
+    public String getScreenshotAsBase64() throws IOException {
+        TakesScreenshot camera = (TakesScreenshot) driver;
+        File source = camera.getScreenshotAs(OutputType.FILE);
+        String path = System.getProperty("user.dir") + "/src/test/java/reports/screenshots/image64.png";
+        System.out.println(path);
+        File destination = new File(path);
+        FileUtils.copyFile(source, destination);
+        byte[] imageBytes = IOUtils.toByteArray(new FileInputStream(path));
+        return Base64.getEncoder().encodeToString(imageBytes);
+
     }
 
     @BeforeSuite
@@ -120,7 +135,7 @@ public class ExtentReportsTest {
         test1.info(MarkupHelper.createCodeBlock(jsonExample, CodeLanguage.JSON));
         test1.info(MarkupHelper.createCodeBlock(xmlExample, CodeLanguage.XML));
         test1.fail(MarkupHelper.createLabel("Login test failed", ExtentColor.RED));
-        test1.pass("Some value here", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshotPath()).build());
+        test1.pass("Regular Screenshot attached here", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshotPath()).build());
 
         driver.navigate().to("https://duckduckgo.com");
         ExtentTest test2 = extent.createTest("Home Page test").assignAuthor("Another Author").assignCategory("Integration").assignDevice("safari latest");
@@ -130,5 +145,7 @@ public class ExtentReportsTest {
         test2.pass("Login Test completed successfully");
         test2.info("This is some info for testing logs");
         test2.pass(MarkupHelper.createLabel("Login test passed", ExtentColor.GREEN));
+        test2.pass("Base64 screenshot attached here", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshotAsBase64()).build());
+
     }
 }
