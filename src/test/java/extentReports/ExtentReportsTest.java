@@ -15,6 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExtentReportsTest {
 
@@ -23,6 +26,10 @@ public class ExtentReportsTest {
 
         String jsonExample = new String(Files.readAllBytes((Paths.get("src/test/java/resources/example.json"))));
         String xmlExample = new String(Files.readAllBytes((Paths.get("src/test/java/resources/example.xml"))));
+        Map<String, String> map = new HashMap<>();
+        map.put("key1", "Selenium");
+        map.put("key2", "Appium");
+        map.put("key3", "RestAssured");
 
         ExtentReports extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/reports/index.html")
@@ -59,6 +66,8 @@ public class ExtentReportsTest {
         test1.pass("Login Test completed successfully");
         test1.fail("Test Failed here");
         test1.info("This is some info for testing logs");
+        test1.pass(MarkupHelper.createOrderedList(Arrays.asList(new String[]{"Selenium", "Appium", "RestAssured"})).getMarkup());
+        test1.pass(MarkupHelper.createOrderedList(map).getMarkup());
         test1.info(MarkupHelper.createCodeBlock(jsonExample, CodeLanguage.JSON));
         test1.info(MarkupHelper.createCodeBlock(xmlExample, CodeLanguage.XML));
         test1.fail(MarkupHelper.createLabel("Login test failed", ExtentColor.RED));
