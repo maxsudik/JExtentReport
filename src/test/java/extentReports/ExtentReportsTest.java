@@ -6,7 +6,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.CodeLanguage;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import freemarker.template.MapKeyValuePairIterator;
+import com.aventstack.extentreports.reporter.configuration.ViewName;
 import org.testng.annotations.Test;
 
 import java.awt.*;
@@ -20,12 +20,21 @@ public class ExtentReportsTest {
     @Test
     public void extentTest() throws IOException {
 
-        String jsonExample = new String (Files.readAllBytes((Paths.get("src/test/java/resources/example.json"))));
-        String xmlExample = new String (Files.readAllBytes((Paths.get("src/test/java/resources/example.xml"))));
-
+        String jsonExample = new String(Files.readAllBytes((Paths.get("src/test/java/resources/example.json"))));
+        String xmlExample = new String(Files.readAllBytes((Paths.get("src/test/java/resources/example.xml"))));
 
         ExtentReports extent = new ExtentReports();
-        ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/reports/index.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/reports/index.html")
+                .viewConfigurer()
+                .viewOrder()
+                .as(new ViewName[]{
+                        ViewName.DASHBOARD,
+                        ViewName.TEST,
+                        ViewName.AUTHOR,
+                        ViewName.DEVICE,
+                        ViewName.CATEGORY,
+                        ViewName.EXCEPTION,
+                        ViewName.LOG}).apply();
         ExtentSparkReporter failedSpark = new ExtentSparkReporter("src/test/java/reports/failed-tests-index.html").filter().statusFilter().as(new Status[]{Status.FAIL}).apply();
 
         final File CONF = new File("src/test/java/config/spark-config.json");
