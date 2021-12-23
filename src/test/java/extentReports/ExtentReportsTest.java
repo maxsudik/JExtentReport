@@ -8,9 +8,10 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
 
 import java.awt.*;
 import java.io.File;
@@ -23,10 +24,12 @@ import java.util.Map;
 
 public class ExtentReportsTest {
 
+    WebDriver driver;
     ExtentReports extent;
 
     @BeforeSuite
     public void setUp() throws IOException {
+        WebDriverManager.chromedriver().setup();
 
         extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/reports/index.html")
@@ -62,6 +65,16 @@ public class ExtentReportsTest {
 //        spark.config().setReportName("Max Sudik");
 
         extent.attachReporter(spark, failedSpark);
+    }
+
+    @BeforeTest
+    public void setUpDriver() {
+        driver = new ChromeDriver();
+    }
+
+    @AfterTest
+    public void setDownDriver() {
+        driver.quit();
     }
 
     @AfterSuite
