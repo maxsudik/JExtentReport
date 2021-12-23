@@ -6,15 +6,22 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
+
 public class ExtentReportsTest {
 
     @Test
-    public void extentTest() {
+    public void extentTest() throws IOException {
         ExtentReports extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/reports/index.html");
-        spark.config().setTheme(Theme.DARK);
-        spark.config().setDocumentTitle("My Report");
-        spark.config().setReportName("Max Sudik");
+
+        final File CONF = new File("src/test/java/config/spark-config.xml");
+        spark.loadXMLConfig(CONF);
+
+//        spark.config().setTheme(Theme.DARK);
+//        spark.config().setDocumentTitle("My Report");
+//        spark.config().setReportName("Max Sudik");
         extent.attachReporter(spark);
 
         ExtentTest test1 = extent.createTest("Login Test").assignAuthor("Max Sudik").assignCategory("Smoke").assignCategory("Regression").assignDevice("chrome 96");
