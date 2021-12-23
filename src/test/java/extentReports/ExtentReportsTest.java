@@ -3,17 +3,27 @@ package extentReports;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.CodeLanguage;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import freemarker.template.MapKeyValuePairIterator;
 import org.testng.annotations.Test;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ExtentReportsTest {
 
     @Test
     public void extentTest() throws IOException {
+
+        String jsonExample = new String (Files.readAllBytes((Paths.get("src/test/java/resources/example.json"))));
+        String xmlExample = new String (Files.readAllBytes((Paths.get("src/test/java/resources/example.xml"))));
+
+
         ExtentReports extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/reports/index.html");
         ExtentSparkReporter failedSpark = new ExtentSparkReporter("src/test/java/reports/failed-tests-index.html").filter().statusFilter().as(new Status[]{Status.FAIL}).apply();
@@ -39,6 +49,8 @@ public class ExtentReportsTest {
         test1.pass("Login Test completed successfully");
         test1.fail("Test Failed here");
         test1.info("This is some info for testing logs");
+        test1.info(MarkupHelper.createCodeBlock(jsonExample, CodeLanguage.JSON));
+        test1.info(MarkupHelper.createCodeBlock(xmlExample, CodeLanguage.XML));
 
         ExtentTest test2 = extent.createTest("Home Page test").assignAuthor("Another Author").assignCategory("Integration").assignDevice("safari latest");
         test2.pass("Login Test started successfully");
