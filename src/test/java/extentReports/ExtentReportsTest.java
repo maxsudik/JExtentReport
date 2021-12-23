@@ -8,6 +8,8 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.awt.*;
@@ -21,17 +23,12 @@ import java.util.Map;
 
 public class ExtentReportsTest {
 
-    @Test
-    public void extentTest() throws IOException {
+    ExtentReports extent;
 
-        String jsonExample = new String(Files.readAllBytes((Paths.get("src/test/java/resources/example.json"))));
-        String xmlExample = new String(Files.readAllBytes((Paths.get("src/test/java/resources/example.xml"))));
-        Map<String, String> map = new HashMap<>();
-        map.put("key1", "Selenium");
-        map.put("key2", "Appium");
-        map.put("key3", "RestAssured");
+    @BeforeSuite
+    public void setUp() throws IOException {
 
-        ExtentReports extent = new ExtentReports();
+        extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/reports/index.html")
                 .viewConfigurer()
                 .viewOrder()
@@ -43,21 +40,45 @@ public class ExtentReportsTest {
                         ViewName.CATEGORY,
                         ViewName.EXCEPTION,
                         ViewName.LOG}).apply();
-        ExtentSparkReporter failedSpark = new ExtentSparkReporter("src/test/java/reports/failed-tests-index.html").filter().statusFilter().as(new Status[]{Status.FAIL}).apply();
+        ExtentSparkReporter failedSpark = new ExtentSparkReporter("src/test/java/reports/failed-tests-index.html")
+                .filter().statusFilter().as(new Status[]{Status.FAIL}).apply();
 
         final File CONF = new File("src/test/java/config/spark-config.json");
         spark.loadJSONConfig(CONF);
         failedSpark.loadJSONConfig(CONF);
 
-
+        /**
+         This section is for configuring Extent report using XML file config located at
+         src/test/java/config/spark-config.xml
+         */
 //        final File CONF = new File("src/test/java/config/spark-config.xml");
 //        spark.loadXMLConfig(CONF);
 
+        /**
+         * This section is for configuration Extent report using .config() method of ExtentSparkReporter class
+         */
 //        spark.config().setTheme(Theme.DARK);
 //        spark.config().setDocumentTitle("My Report");
 //        spark.config().setReportName("Max Sudik");
-        extent.attachReporter(spark, failedSpark);
 
+        extent.attachReporter(spark, failedSpark);
+    }
+
+    @AfterSuite
+    public void setDown() throws IOException {
+        extent.flush();
+        Desktop.getDesktop().browse(new File("src/test/java/reports/index.html").toURI()); //opens report automatically after the execution
+    }
+
+    @Test
+    public void extentTest() throws IOException {
+
+        String jsonExample = new String(Files.readAllBytes((Paths.get("src/test/java/resources/example.json"))));
+        String xmlExample = new String(Files.readAllBytes((Paths.get("src/test/java/resources/example.xml"))));
+        Map<String, String> map = new HashMap<>();
+        map.put("key1", "Selenium");
+        map.put("key2", "Appium");
+        map.put("key3", "RestAssured");
 
         ExtentTest test1 = extent.createTest("Login Test").assignAuthor("Max Sudik").assignCategory("Smoke").assignCategory("Regression").assignDevice("chrome 96");
         test1.pass("Login Test started successfully");
@@ -79,8 +100,5 @@ public class ExtentReportsTest {
         test2.pass("Login Test completed successfully");
         test2.info("This is some info for testing logs");
         test2.pass(MarkupHelper.createLabel("Login test passed", ExtentColor.GREEN));
-
-        extent.flush();
-        Desktop.getDesktop().browse(new File("src/test/java/reports/index.html").toURI()); //opens report automatically after the execution
     }
 }
