@@ -17,7 +17,7 @@ public class ExtentReportsTest {
         spark.config().setReportName("Max Sudik");
         extent.attachReporter(spark);
 
-        ExtentTest test1 = extent.createTest("Login Test");
+        ExtentTest test1 = extent.createTest("Login Test").assignAuthor("Max Sudik").assignCategory("Smoke").assignCategory("Regression").assignDevice("chrome 96");
         test1.pass("Login Test started successfully");
         test1.pass("URL is loaded");
         test1.pass("Value entered");
@@ -25,7 +25,7 @@ public class ExtentReportsTest {
         test1.fail("Test Failed here");
         test1.info("This is some info for testing logs");
 
-        ExtentTest test2 = extent.createTest("Home Page test");
+        ExtentTest test2 = extent.createTest("Home Page test").assignAuthor("Another Author").assignCategory("Integration").assignDevice("safari latest");
         test2.pass("Login Test started successfully");
         test2.pass("URL is loaded");
         test2.pass("Value entered");
