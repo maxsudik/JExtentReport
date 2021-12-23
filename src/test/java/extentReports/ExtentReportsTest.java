@@ -6,6 +6,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.testng.annotations.Test;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,8 +17,12 @@ public class ExtentReportsTest {
         ExtentReports extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("src/test/java/reports/index.html");
 
-        final File CONF = new File("src/test/java/config/spark-config.xml");
-        spark.loadXMLConfig(CONF);
+        final File CONF = new File("src/test/java/config/spark-config.json");
+        spark.loadJSONConfig(CONF);
+
+
+//        final File CONF = new File("src/test/java/config/spark-config.xml");
+//        spark.loadXMLConfig(CONF);
 
 //        spark.config().setTheme(Theme.DARK);
 //        spark.config().setDocumentTitle("My Report");
@@ -41,5 +46,6 @@ public class ExtentReportsTest {
         test2.info("This is some info for testing logs");
 
         extent.flush();
+        Desktop.getDesktop().browse(new File("src/test/java/reports/index.html").toURI()); //opens report automatically after the execution
     }
 }
