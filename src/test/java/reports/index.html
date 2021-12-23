@@ -35,7 +35,7 @@
 <a href="#"><span class="badge badge-primary">Report Name</span></a>
 </li>
 <li class="m-r-10">
-<a href="#"><span class="badge badge-primary">Dec. 23, 2021 11:03:57 a.m.</span></a>
+<a href="#"><span class="badge badge-primary">Dec. 23, 2021 11:26:33 a.m.</span></a>
 </li>
 </ul>
 </div>
@@ -90,7 +90,7 @@
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a>
 <ul id="author-toggle" class="dropdown-menu dropdown-md p-v-0">
-<a class="dropdown-item" href="#">MaxSudik</a><a class="dropdown-item" href="#">AnotherAuthor</a>
+<a class="dropdown-item" href="#">AnotherAuthor</a><a class="dropdown-item" href="#">MaxSudik</a>
 </ul>
 </li>
 <li class="dropdown">
@@ -115,7 +115,7 @@
           <div class="test-detail">
             <p class="name">Login Test</p>
             <p class="text-sm">
-              <span>11:03:57 a.m.</span> / <span>00:00:00:007</span>
+              <span>11:26:33 a.m.</span> / <span>00:00:00:123</span>
               <span class="badge fail-bg log float-right">Fail</span>
             </p>
           </div>
@@ -124,9 +124,9 @@
 <div class="p-v-10">
 <div class="info">
 <h5 class="test-status text-fail">Login Test</h5>
-<span class='badge badge-success'>12.23.2021 11:03:57 a.m.</span>
-<span class='badge badge-danger'>12.23.2021 11:03:57 a.m.</span>
-<span class='badge badge-default'>00:00:00:007</span>
+<span class='badge badge-success'>12.23.2021 11:26:33 a.m.</span>
+<span class='badge badge-danger'>12.23.2021 11:26:33 a.m.</span>
+<span class='badge badge-default'>00:00:00:123</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
 <span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
 <span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
@@ -142,44 +142,121 @@
   <tbody>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           Login Test started successfully
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           URL is loaded
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           Value entered
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           Login Test completed successfully
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log fail-bg">Fail</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           Test Failed here
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log info-bg">Info</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           This is some info for testing logs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:26:33 a.m.</td>
+        <td>
+           <div class='json-tree' id='code-block-json-0'></div>
+ <script>
+  function jsonTreeCreate0() { 
+   document.getElementById('code-block-json-0').innerHTML = JSONTree.create({"menu": {
+  "id": "file",
+  "value": "File",
+  "popup": {
+    "menuitem": [
+      {"value": "New", "onclick": "CreateNewDoc()"},
+      {"value": "Open", "onclick": "OpenDoc()"},
+      {"value": "Close", "onclick": "CloseDoc()"}
+    ]
+  }
+}}); 
+  }
+  jsonTreeCreate0();
+ </script>
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:26:33 a.m.</td>
+        <td>
+          <div class='row'>
+ <div class='col-md-12'>
+  <textarea readonly class='code-block'><breakfast_menu>
+    <food>
+        <name>Belgian Waffles</name>
+        <price>$5.95</price>
+        <description>
+            Two of our famous Belgian Waffles with plenty of real maple syrup
+        </description>
+        <calories>650</calories>
+    </food>
+    <food>
+        <name>Strawberry Belgian Waffles</name>
+        <price>$7.95</price>
+        <description>
+            Light Belgian waffles covered with strawberries and whipped cream
+        </description>
+        <calories>900</calories>
+    </food>
+    <food>
+        <name>Berry-Berry Belgian Waffles</name>
+        <price>$8.95</price>
+        <description>
+            Light Belgian waffles covered with an assortment of fresh berries and whipped cream
+        </description>
+        <calories>900</calories>
+    </food>
+    <food>
+        <name>French Toast</name>
+        <price>$4.50</price>
+        <description>
+            Thick slices made from our homemade sourdough bread
+        </description>
+        <calories>600</calories>
+    </food>
+    <food>
+        <name>Homestyle Breakfast</name>
+        <price>$6.95</price>
+        <description>
+            Two eggs, bacon or sausage, toast, and our ever-popular hash browns
+        </description>
+        <calories>950</calories>
+    </food>
+</breakfast_menu></textarea>
+ </div>
+</div>
+
         </td>
       </tr>
   </tbody>
@@ -194,7 +271,7 @@
           <div class="test-detail">
             <p class="name">Home Page test</p>
             <p class="text-sm">
-              <span>11:03:57 a.m.</span> / <span>00:00:00:000</span>
+              <span>11:26:33 a.m.</span> / <span>00:00:00:001</span>
               <span class="badge pass-bg log float-right">Pass</span>
             </p>
           </div>
@@ -203,9 +280,9 @@
 <div class="p-v-10">
 <div class="info">
 <h5 class="test-status text-pass">Home Page test</h5>
-<span class='badge badge-success'>12.23.2021 11:03:57 a.m.</span>
-<span class='badge badge-danger'>12.23.2021 11:03:57 a.m.</span>
-<span class='badge badge-default'>00:00:00:000</span>
+<span class='badge badge-success'>12.23.2021 11:26:33 a.m.</span>
+<span class='badge badge-danger'>12.23.2021 11:26:33 a.m.</span>
+<span class='badge badge-default'>00:00:00:001</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
 <span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
 <span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
@@ -220,35 +297,35 @@
   <tbody>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           Login Test started successfully
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           URL is loaded
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           Value entered
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           Login Test completed successfully
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log info-bg">Info</span></td>
-        <td>11:03:57 a.m.</td>
+        <td>11:26:33 a.m.</td>
         <td>
           This is some info for testing logs
         </td>
@@ -299,7 +376,7 @@
 <tbody>
 <tr class="tag-test-status" status="fail">
 <td><span class="badge log fail-bg">Fail</span></td>
-<td>11:03:57 a.m.</td>
+<td>11:26:33 a.m.</td>
 <td>
 <a href="#" class="linked" test-id='1' id='1'>Login Test</a>
 </td>
@@ -332,7 +409,7 @@
 <tbody>
 <tr class="tag-test-status" status="fail">
 <td><span class="badge log fail-bg">Fail</span></td>
-<td>11:03:57 a.m.</td>
+<td>11:26:33 a.m.</td>
 <td>
 <a href="#" class="linked" test-id='1' id='1'>Login Test</a>
 </td>
@@ -365,7 +442,7 @@
 <tbody>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>11:03:57 a.m.</td>
+<td>11:26:33 a.m.</td>
 <td>
 <a href="#" class="linked" test-id='2' id='2'>Home Page test</a>
 </td>
@@ -414,7 +491,7 @@
 <tbody>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>11:03:57 a.m.</td>
+<td>11:26:33 a.m.</td>
 <td>
 <a href="#" class="linked" test-id='2' id='2'>Home Page test</a>
 </td>
@@ -447,7 +524,7 @@
 <tbody>
 <tr class="tag-test-status" status="fail">
 <td><span class="badge log fail-bg">Fail</span></td>
-<td>11:03:57 a.m.</td>
+<td>11:26:33 a.m.</td>
 <td>
 <a href="#" class="linked" test-id='1' id='1'>Login Test</a>
 </td>
@@ -475,39 +552,6 @@
 <li class="test-item">
 <div class="test-detail">
 <span class="meta">
-<span class='badge log badge-danger'>1</span>
-</span>
-<p class="name">MaxSudik</p>
-<p class="duration text-sm">1 tests</p>
-</div>
-<div class="test-contents d-none">
-<div class="info">
-<h4>MaxSudik</h4>
-<span status="fail" class='badge log badge-danger'>1 failed</span>
-</div>
-<table class='table table-sm mt-4'>
-<thead>
-<tr>
-<th class="status-col">Status</th>
-<th class="timestamp-col">Timestamp</th>
-<th>TestName</th>
-</tr>
-</thead>
-<tbody>
-<tr class="tag-test-status" status="fail">
-<td><span class="badge log fail-bg">Fail</span></td>
-<td>11:03:57 a.m.</td>
-<td>
-<a href="#" class="linked" test-id='1' id='1'>Login Test</a>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</li>
-<li class="test-item">
-<div class="test-detail">
-<span class="meta">
 <span class='badge log pass-bg'>1</span>
 </span>
 <p class="name">AnotherAuthor</p>
@@ -529,9 +573,42 @@
 <tbody>
 <tr class="tag-test-status" status="pass">
 <td><span class="badge log pass-bg">Pass</span></td>
-<td>11:03:57 a.m.</td>
+<td>11:26:33 a.m.</td>
 <td>
 <a href="#" class="linked" test-id='2' id='2'>Home Page test</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log badge-danger'>1</span>
+</span>
+<p class="name">MaxSudik</p>
+<p class="duration text-sm">1 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>MaxSudik</h4>
+<span status="fail" class='badge log badge-danger'>1 failed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>11:26:33 a.m.</td>
+<td>
+<a href="#" class="linked" test-id='1' id='1'>Login Test</a>
 </td>
 </tr>
 </tbody>
@@ -551,13 +628,13 @@
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Started</p>
-<h3>Dec. 23, 2021 11:03:57 a.m.</h3>
+<h3>Dec. 23, 2021 11:26:33 a.m.</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Ended</p>
-<h3>Dec. 23, 2021 11:03:57 a.m.</h3>
+<h3>Dec. 23, 2021 11:26:33 a.m.</h3>
 </div></div>
 </div>
 <div class="col-md-3">
@@ -608,10 +685,10 @@
 </div>
 </div>
 <div class="card-footer">
-<div><small data-tooltip='72%'><b>8</b> events passed</small></div>
+<div><small data-tooltip='61%'><b>8</b> events passed</small></div>
 <div>
-<small data-tooltip='9%'><b>1</b> events failed,
-<b data-tooltip='%'>2</b> others
+<small data-tooltip='7%'><b>1</b> events failed,
+<b data-tooltip='%'>4</b> others
 </small>
 </div>
 </div>
@@ -626,20 +703,20 @@
 <thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead>
 <tbody>
 <tr>
-<td>MaxSudik</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0%</td>
-</tr>
-<tr>
 <td>AnotherAuthor</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>100%</td>
+</tr>
+<tr>
+<td>MaxSudik</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0%</td>
 </tr>
 </tbody>
 </table></div>
@@ -730,7 +807,7 @@ passEvents: 8,
 failEvents: 1,
 warningEvents: 0,
 skipEvents: 0,
-infoEvents: 2
+infoEvents: 4
 };
 </script>        </div>
       </div>
