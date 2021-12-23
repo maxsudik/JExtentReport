@@ -2,6 +2,7 @@ package extentReports;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.CodeLanguage;
 import com.aventstack.extentreports.markuputils.ExtentColor;
@@ -33,7 +34,8 @@ public class ExtentReportsTest {
     public String getScreenshotPath() throws IOException {
         TakesScreenshot camera = (TakesScreenshot) driver;
         File source = camera.getScreenshotAs(OutputType.FILE);
-        String path = System.getProperty("user.dir") + "test/java/reports/screenshots.image.png";
+        String path = System.getProperty("user.dir") + "/src/test/java/reports/screenshots/image.png";
+        System.out.println(path);
         File destination = new File(path);
         FileUtils.copyFile(source, destination);
         return path;
@@ -118,6 +120,7 @@ public class ExtentReportsTest {
         test1.info(MarkupHelper.createCodeBlock(jsonExample, CodeLanguage.JSON));
         test1.info(MarkupHelper.createCodeBlock(xmlExample, CodeLanguage.XML));
         test1.fail(MarkupHelper.createLabel("Login test failed", ExtentColor.RED));
+        test1.pass("Some value here", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshotPath()).build());
 
         driver.navigate().to("https://duckduckgo.com");
         ExtentTest test2 = extent.createTest("Home Page test").assignAuthor("Another Author").assignCategory("Integration").assignDevice("safari latest");
